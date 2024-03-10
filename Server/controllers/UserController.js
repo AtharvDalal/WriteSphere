@@ -45,3 +45,25 @@ export const login = catchAsyncErrors(async(req,res,next)=>{
 
     
 })
+
+export const logout = catchAsyncErrors((req, res, next) => {
+  res.status(200).cookie("token", "", {
+    expires: new Date(0), // Set expiration date to a date in the past
+    httpOnly: true,
+  })
+  .json({
+    success: true,
+    message: "User Logged out Successfully"
+  });
+});
+
+
+export const getMyProfile = catchAsyncErrors((req,res,next)=>{
+
+
+  const user = req.user;
+  res.status(200).json({
+    success:true,
+    user
+  })
+})
