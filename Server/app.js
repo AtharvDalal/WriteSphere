@@ -4,7 +4,7 @@ import cors from 'cors'
 import cookierParser from  "cookie-parser"
 import {dbConnection} from './DB/dbConnection.js'
 import { ErrorMiddleware } from './middlewares/error.js';
-
+import userRouter from './routes/userRoutes.js'
 
 const app  = express()
 
@@ -17,6 +17,9 @@ app.use(cors({
 app.use(cookierParser());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+//routes
+app.use('/api/v1',userRouter)
 
 dbConnection()
 
