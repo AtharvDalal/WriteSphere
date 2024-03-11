@@ -2,20 +2,38 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { sendToken } from "../utils/jwtToken.js";
+import cloudinary from "cloudinary"
 
 
 export const register = catchAsyncErrors(async (req,res,next)=>{
-    
+         
+      if (!req.files || Object.keys(req.files).length === 0) {
+          return next(new ErrorHandler("User Avatar Required",400))
+      }
+   const {avatar} = req.files;
+
+   const allowedFormats = ["image/png","image/jpeg","image/webp"]
+    if (!allowedFormats.includes(avatar.mimetype)) {
+      return next(new ErrorHandler("Invalid File Type ,Please Provide Your Avatar in png ,jpeg ,webp format ",400))
+
+    }
          const {name,email,phone,role,education,password} = req.body
-         if (!name || !email || !phone || !role || !education || !password) {
+         if (!name || !email || !phone || !role || !education || !password || !avatar) {
                   return next(new ErrorHandler("Please Provide Full Deatils",400))
          }
          let userexist = await User.findOne({email})
          if (userexist) {
             return next(new ErrorHandler("User already Exist",400))
          }
+
+         const cloudninaryResponse = await cloudinary.uploader.upload(
+          avatar.tempFilePath
+         );
+         if (!cloudninaryResponse || cloudninaryResponse.error) {
+              console.log("Cloudninary Error:",cloudninaryResponse.error || "Unknown Cloudninary Error");
+         }
        userexist =   await User.create({
-           name,email,phone,role,education,password
+           name,email,phone,role,education,password,avatar:{public_id: cloudninaryResponse.public_id, url:cloudninaryResponse.secure_url}
          });
          sendToken(userexist,200, "User Registered Successfully",res)
       
