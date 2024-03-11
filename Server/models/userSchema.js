@@ -3,6 +3,7 @@ import validator from "validator";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -34,6 +35,11 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     public_id: {
       type: String,
+      required:true
+    },
+    url:{
+      type:String,
+      required:true
     },
   },
   education: {
