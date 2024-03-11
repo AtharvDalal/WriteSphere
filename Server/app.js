@@ -6,6 +6,7 @@ import {dbConnection} from './DB/dbConnection.js'
 import { ErrorMiddleware } from './middlewares/error.js';
 import userRouter from './routes/userRoutes.js'
 import  fileUpload  from 'express-fileupload'
+import blogRoute from './routes/blogRoute.js'
 
 
 const app  = express()
@@ -26,7 +27,8 @@ app.use(fileUpload({
 }))
 
 //routes
-app.use('/api/v1',userRouter)
+app.use('/api/v1/user',userRouter)
+app.use('/api/v1/blog',blogRoute)
 
 dbConnection()
 
