@@ -12,7 +12,7 @@ import blogRoute from './routes/blogRoute.js'
 const app  = express()
 
 app.use(cors({
-    origin:[],
+    origin:[process.env.FRONTEND_URL],
     methods:["GET","PUT","POST","DELETE"],
     credentials:true
 }));
