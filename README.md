@@ -33,9 +33,6 @@ The Blog Application is a robust, secure, and scalable platform built using Node
     - Comprehensive Error Handling: Proper error messages and status codes are provided for ease of troubleshooting.
 
 
-7. **Logging and Monitoring:**
-    - Logging: Detailed logging of events and errors for monitoring and debugging purposes.
-    - Monitoring: Monitoring tools are integrated to keep track of application performance and health.
 
 
 #### Conclusion:
