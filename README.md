@@ -1,6 +1,6 @@
 
 
-### Project Description: Blog Application Backend with Node.js, Express, and MongoDB
+### WriteSphere
 
 #### Introduction:
 The Blog Application is a robust, secure, and scalable platform built using Node.js, Express, and MongoDB. It offers a comprehensive set of features for users to create, manage, and share their blogs effectively. The application provides a seamless user experience with JWT authentication ensuring secure access to the platform.
